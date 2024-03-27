@@ -11,6 +11,7 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.KafkaContainer;
+import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.containers.localstack.LocalStackContainer;
 import org.testcontainers.elasticsearch.ElasticsearchContainer;
@@ -19,18 +20,24 @@ import org.testcontainers.utility.MountableFile;
 @TestConfiguration(proxyBeanMethods = false)
 public class ContainersConfig {
 
+//    @Bean
+//    @ServiceConnection
+//    PostgreSQLContainer<?> postgresContainer() {
+//        PostgreSQLContainer<?> selfPostgreSQLContainer = new PostgreSQLContainer<>(parse("postgres:16-alpine"));
+//        return selfPostgreSQLContainer;
+//    }
+
     @Bean
     @ServiceConnection
-    PostgreSQLContainer<?> postgresContainer() {
-        PostgreSQLContainer<?> selfPostgreSQLContainer = new PostgreSQLContainer<>(parse("postgres:16-alpine"));
-
-        return selfPostgreSQLContainer;
+    MongoDBContainer mongodb() {
+        var mongo = new MongoDBContainer("mongo:7.0.7-jammy");
+        return mongo;
     }
 
     @Bean
     @ServiceConnection
     KafkaContainer kafkaContainer() {
-        return new KafkaContainer(parse("confluentinc/cp-kafka:7.5.0")).withReuse(true);
+        return new KafkaContainer(parse("confluentinc/cp-kafka:7.5.0"));
     }
 
     @Bean("localstackContainer")

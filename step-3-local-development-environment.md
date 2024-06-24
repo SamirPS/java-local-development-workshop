@@ -81,7 +81,7 @@ So, add the following dependencies as well:
 ```
 
 ## Create ContainersConfig class under src/test/java
-Let's create `ContainersConfig` class under `src/test/java` to configure the required containers.
+Let's create `com.testcontainers.catalog.ContainersConfig` class under `src/test/java` to configure the required containers.
 
 ```java
 package com.testcontainers.catalog;
@@ -143,7 +143,7 @@ Let's understand what this configuration class does:
 * We also configured an `ApplicationRunner` bean to create the AWS resources like S3 bucket upon application startup.
   
 ## Create TestApplication class under src/test/java
-Next, let's create a `TestApplication` class under `src/test/java` to start the application with the Testcontainers configuration.
+Next, let's create a `com.testcontainers.catalog.TestApplication` class under `src/test/java` to start the application with the Testcontainers configuration.
 
 ```java
 package com.testcontainers.catalog;
@@ -189,7 +189,7 @@ You should get a response similar to the following:
 ### Upload Product Image
 ```shell
 curl -X "POST" 'http://localhost:8080/api/products/P101/image' \
---form 'file=@"/Users/siva/work/product-p101.jpg"'
+--form 'file=@"src/test/resources/P101.jpg"'
 ```
 
 You should see a response similar to the following:

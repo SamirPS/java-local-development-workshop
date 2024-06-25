@@ -38,6 +38,12 @@ with the following connection properties:
 psql -h localhost -p 5432 -U test -d test
 ```
 
+If you authenticate with the default password `test` you should be able to and run the following SQL query to check the products:
+
+```sql
+select * from test.public.products;
+```
+
 Similarly, you can connect to any of your containers using the same approach by using the port-mapping feature of Testcontainers Desktop.
 
 ### 
